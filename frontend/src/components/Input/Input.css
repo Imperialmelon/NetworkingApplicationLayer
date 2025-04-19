@@ -1,0 +1,80 @@
+/* Chat input container */
+.chat-input-container {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 1em;
+  width: 70%;
+  max-width: 1000px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 3%;
+}
+
+/* Chat input */
+.chat-input {
+  display: flex;
+  height: 4em;
+  width: 100%;
+  padding: 0.5em 1em;
+  background-color: rgba(224, 225, 227, 0.7);
+  border-radius: 8px;
+  align-items: center;
+}
+
+.chat--input {
+  background-color: transparent !important;
+  border: none;
+  border-radius: 0.5em;
+  color: black !important;
+  padding: 0.5em 1em !important;
+}
+
+.chat--input .MuiInputBase-input {
+  color: black !important;
+}
+
+/* Стили для placeholder */
+.chat--input .MuiInputBase-input::placeholder {
+  color: black !important;
+  font-weight: bold !important;
+  opacity: 1 !important;
+}
+
+/* Firefox */
+.chat--input .MuiInputBase-input::-moz-placeholder {
+  color: black !important;
+  font-weight: bold !important;
+  opacity: 1 !important;
+}
+
+/* Internet Explorer 10-11 */
+.chat--input .MuiInputBase-input:-ms-input-placeholder {
+  color: black !important;
+  font-weight: bold !important;
+}
+
+/* Microsoft Edge */
+.chat--input .MuiInputBase-input::-ms-input-placeholder {
+  color: black !important;
+  font-weight: bold !important;
+}
+
+/* Send button */
+.send-button {
+  margin-left: 12px !important;
+  background-color: #1976d2 !important;
+  width: 50px !important;
+  height: 50px !important;
+  transition: transform 0.2s ease-in-out !important;
+}
+
+.send-button:hover {
+  transform: scale(1.1) !important;
+  background-color: #1565c0 !important;
+}
+
+.send-icon {
+  width: 24px;
+  height: 24px;
+}
