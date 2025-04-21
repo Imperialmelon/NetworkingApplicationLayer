@@ -75,27 +75,4 @@ export const Login: React.FC<LoginProps> = ({ ws, setWs, createWebSocket }) => {
       </Container>
     </Box>
   )
-
-  // return (
-  //   <>
-  //     <div className="login">
-  //       <div className="login--card">
-  //         <div className="login--header">Вход</div>
-
-  //         <TextField id="outlined-basic" label="Введите имя" variant="outlined"
-  //           className="login--input"
-  //           value={userName}
-  //           onChange={handleChangeLogin}
-  //         />
-
-  //         <Button variant="contained"
-  //                 onClick={handleClickSignInBtn}
-  //         >
-  //           Войти
-  //         </Button>
-
-  //       </div>
-  //     </div>
-  //   </>
-  // );
 }

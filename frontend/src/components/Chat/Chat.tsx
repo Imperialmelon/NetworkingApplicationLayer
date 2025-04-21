@@ -81,40 +81,5 @@ export const Chat: React.FC<ChatProps> = ({ messages, ws, messageArray, setMessa
         <Input ws={ws} setMessageArray={setMessageArray} />
       </Box>
     </>
-    // <>
-    //   <div className="chat">
-    //     <div className="chat--header">
-    //       Сообщения от {login}
-    //     </div>
-
-    //     <div className="chat--body">
-    //       {messageArray.length > 0 ?
-    //         <div className="chat--container">
-    //           {messageArray.map((msg: Message, index: number) => (
-    //             <div key={index} className="chat--msg">
-    //               <MessageCard msg={msg}/>
-    //             </div>
-    //           ))}
-    //         </div>
-    //         :
-    //         <div className="chat--no-msg">
-    //           <div style={{fontSize: '2em', color: 'gray'}}>Здесь будут сообщения</div>
-    //         </div>
-    //       }
-    //     </div>
-
-    //     <Input ws={ws} setMessageArray={setMessageArray}/>
-    //   </div>
-
-    //     <Button variant="contained"
-    //             onClick={handleClickLogoutBtn}
-    //             style={{
-    //               height: 'fit-content',
-    //               margin: '1em'
-    //             }}
-    //     >
-    //       Выход
-    //     </Button>
-    // </>
   )
 }

@@ -1,0 +1,95 @@
+.mars-chat {
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .mars-chat--body {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    background-image: url("../../assets/earth-background.png");
+    background-size: cover;
+    background-position: center;
+    height: calc(100vh - 64px);
+  }
+  
+  .mars-chat--container {
+    overflow-y: auto;
+    height: calc(100vh - 64px);
+    padding: 1em;
+  }
+  
+  .mars-chat--msg {
+    margin-bottom: 1em;
+  }
+  
+  .mars-chat--no-msg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .mars-msg--container {
+    width: 100%;
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  
+  .mars-msg--own {
+    justify-content: flex-end;
+  }
+  
+  .mars-msg--alien {
+    justify-content: flex-start;
+  }
+  
+  .mars-msg--content {
+    max-width: 60%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mars-msg--header {
+    display: flex;
+    margin-bottom: 0.5em;
+  }
+  
+  .mars-msg--text {
+    width: fit-content;
+    padding: 0.5em 1em;
+    border-radius: 15px;
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
+    color: white;
+    word-break: break-word;
+  }
+  
+  .mars-msg--bg--own {
+    background-color: #002366;
+    background-image: url("../../assets/message-background.png");
+    background-size: cover;
+    padding: 15px;
+  }
+  
+  .mars-msg--bg--alien {
+    background-color: #002366;
+    background-image: url("../../assets/message-background.png");
+    background-size: cover;
+    padding: 15px;
+  }
+  
+  .planet-avatar {
+    width: 40px;
+    height: 40px;
+    margin-top: 0.5em;
+  }
+  
