@@ -1,9 +1,8 @@
-
 .msg--container {
   width: 100%;
   display: flex;
   position: relative;
-  align-items: flex-start; 
+  align-items: flex-start;
 }
 
 .msg--own {
@@ -20,7 +19,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  align-items: flex-start; 
+  align-items: flex-start;
 }
 
 .msg--own--reverse {
@@ -40,24 +39,28 @@
 .msg--text {
   width: fit-content;
   padding: 0.5em 1em;
-  border-radius: 0.5em;
+  border-radius: 15px;
   display: flex;
-  justify-content: flex-start; 
-  text-align: left; 
+  justify-content: flex-start;
+  text-align: left;
   color: white;
-  word-break: break-word; 
+  word-break: break-word;
 }
 
 .msg--bg--own {
-  background-color: #1a3d7c;
+  background-color: #002366;
+  background-image: url("../../assets/message-background.png");
+  background-size: cover;
 }
 
 .msg--bg--alien {
-  background-color: #0f2952;
+  background-color: #002366;
+  background-image: url("../../assets/message-background.png");
+  background-size: cover;
 }
 
 .planet-avatar {
   width: 40px !important;
   height: 40px !important;
-  margin-top: 0.5em; 
+  margin-top: 0.5em;
 }

@@ -63,10 +63,11 @@
 /* Send button */
 .send-button {
   margin-left: 12px !important;
-  background-color: #1976d2 !important;
+  background-color: #2050a0 !important;
   width: 50px !important;
   height: 50px !important;
   transition: transform 0.2s ease-in-out !important;
+  border-radius: 50% !important;
 }
 
 .send-button:hover {

@@ -1,66 +1,66 @@
-import {useUser} from "../../hooks/useUser";
-import {Message} from "../../consts";
-import {Input} from "../Input/Input";
-import {MessageCard} from "../MessageCard/MessageCard";
-import {Button, Typography, Box, Avatar, Paper, Stack} from "@mui/material";
-import React from "react";
+"use client"
+
+import { useUser } from "../../hooks/useUser"
+import type { Message } from "../../consts"
+import { Input } from "../Input/Input"
+import { MessageCard } from "../MessageCard/MessageCard"
+import { Button, Typography, Box, Paper, Stack } from "@mui/material"
+import type React from "react"
 
 type ChatProps = {
-  messages: Message[];
-  ws: WebSocket | undefined;
-  messageArray: Message[];
-  setMessageArray: (msg: Message[]) => void;
+  messages: Message[]
+  ws: WebSocket | undefined
+  messageArray: Message[]
+  setMessageArray: (msg: Message[]) => void
 }
 
-export const Chat: React.FC<ChatProps> = ({messages, ws, messageArray, setMessageArray}) => {
-  const {login, resetUser} = useUser();
+// Add this at the top of the file, after the imports
+export const Header = ({ showLogoutButton = false, onLogout = () => {} }) => {
+  return (
+    <Paper elevation={0} className="header">
+      <Stack direction="row" alignItems="center" spacing={1}>
+        <Box display="flex" alignItems="center">
+          <img src={require("../../assets/logo.png") || "/placeholder.svg"} alt="Earth-Mars Chat Logo" height="40" />
+        </Box>
+
+        <Typography variant="caption" className="header-text">
+          Это один маленький чат для человека, но гигантский скачок для общения человечества!
+        </Typography>
+
+        {showLogoutButton && (
+          <Button
+            className="logout_button"
+            variant="contained"
+            onClick={onLogout}
+            sx={{
+              height: "fit-content",
+            }}
+          >
+            Выйти
+          </Button>
+        )}
+      </Stack>
+    </Paper>
+  )
+}
+
+export const Chat: React.FC<ChatProps> = ({ messages, ws, messageArray, setMessageArray }) => {
+  const { login, resetUser } = useUser()
 
   // при логауте закрываем соединение
   const handleClickLogoutBtn = () => {
-    resetUser();
+    resetUser()
     if (ws) {
-      ws.close(4000, login);
+      ws.close(4000, login)
     } else {
-      console.log("ws.close(4000, 'User logout'); don't work");
+      console.log("ws.close(4000, 'User logout'); don't work")
     }
-  };
+  }
 
   return (
     <>
       <Box className="chat">
-      <Paper elevation={0} className="header">
-        <Stack direction="row" alignItems="center" spacing={1}>
-          <Box display="flex" alignItems="center">
-            <Avatar
-              src="https://www.svgrepo.com/show/530103/earth.svg"
-              alt="Earth"
-              className="planet-image"
-              sx={{ width: 30, height: 30 }}
-            />
-            <Avatar
-              src="https://www.svgrepo.com/show/440497/mars.svg"
-              alt="Mars"
-              className="planet-image"
-              sx={{ width: 30, height: 30, ml: 1 }}
-            />
-          </Box>
-          
-
-          <Typography variant="caption" className="header-text">
-            Это один маленький чат для человека, но гигантский скачок для общения человечества!
-          </Typography>
-            <Button className="logout_button"
-          variant="contained"
-          onClick={handleClickLogoutBtn}
-          sx={{
-            height: "fit-content",
-          }}
-        >
-          Выход
-        </Button>
-
-        </Stack>
-      </Paper>
+        <Header showLogoutButton={true} onLogout={handleClickLogoutBtn} />
 
         <Box className="chat--body">
           {messageArray.length > 0 ? (
@@ -78,10 +78,8 @@ export const Chat: React.FC<ChatProps> = ({messages, ws, messageArray, setMessag
           )}
         </Box>
 
-        <Input ws = {ws} setMessageArray={setMessageArray}
-        />
+        <Input ws={ws} setMessageArray={setMessageArray} />
       </Box>
-
     </>
     // <>
     //   <div className="chat">
@@ -118,5 +116,5 @@ export const Chat: React.FC<ChatProps> = ({messages, ws, messageArray, setMessag
     //       Выход
     //     </Button>
     // </>
-  );
+  )
 }

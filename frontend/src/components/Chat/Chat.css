@@ -15,108 +15,126 @@
     height: 85vh;
   } */
 
-
-.chat {
-  background-color: transparent;
-  height: 100%;
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-.header {
-  position: relative;
-  z-index: 2;
-  background-color: white;
-  padding: 8px;
-  border-bottom: 1px solid #e0e0e0;
-  height: 8%;
-  align-content: center;
-}
-.header-text {
-  flex-grow: 1;
-  text-align: center;
-  color: black;
-  font-weight: bold !important;
-  font-size: large !important;
-}
-
-
-.chat--body {
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-  background-image: url("./image.png");
-  background-size: cover;
-  background-position: center;
-}
-
-.chat--container {
-  overflow-y: auto;
-  height: calc(100vh - 130px);
-  padding: 1em;
-}
-
-.chat--msg {
-  margin-bottom: 1em;
-}
-
-.chat--no-msg {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #000;
-}
-
-.chat-page-container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.chat-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url("./image.png");
-  background-size: cover;
-  background-position: center;
-  z-index: -1;
-}
-
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.logout_button {
-  color: black !important;
-  font-size: medium;
-  width: 8% !important;
-  background-color: white !important;
-  border: 2px solid black !important;
-}
+  .chat {
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .header {
+    position: relative;
+    z-index: 2;
+    background-color: white;
+    padding: 8px;
+    border-bottom: 1px solid #e0e0e0;
+    height: 8%;
+    align-content: center;
+  }
+  .header-text {
+    flex-grow: 1;
+    text-align: center;
+    color: black;
+    font-weight: bold !important;
+    font-size: large !important;
+  }
+  
+  .chat--body {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    background-image: url("../../assets/mars-background.png");
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .chat--container {
+    overflow-y: auto;
+    height: calc(100vh - 130px);
+    padding: 1em;
+  }
+  
+  .chat--msg {
+    margin-bottom: 1em;
+  }
+  
+  .chat--no-msg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #000;
+  }
+  
+  .chat-page-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .chat-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("./image.png");
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  .logout_button {
+    color: black !important;
+    font-size: medium;
+    width: 8% !important;
+    background-color: white !important;
+    border: 2px solid black !important;
+  }
+  
+  /* Update message background colors to match the design */
+  .msg--bg--own {
+    background-color: #002366;
+    border-radius: 15px;
+    padding: 15px;
+    position: relative;
+    background-image: url("../../assets/message-background.png");
+    background-size: cover;
+  }
+  
+  .msg--bg--alien {
+    background-color: #002366;
+    border-radius: 15px;
+    padding: 15px;
+    position: relative;
+    background-image: url("../../assets/message-background.png");
+    background-size: cover;
+  }
+  

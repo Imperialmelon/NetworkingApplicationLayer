@@ -1,66 +1,59 @@
-import React from "react";
-import {useUser} from "../../hooks/useUser";
-import {Message} from "../../consts";
-import { Box, Stack, Typography, Avatar } from "@mui/material";
+"use client"
+
+import type React from "react"
+import { useUser } from "../../hooks/useUser"
+import type { Message } from "../../consts"
+import { Box, Stack, Typography, Avatar } from "@mui/material"
 
 type MessageProps = {
-  msg: Message;
+  msg: Message
 }
 
-const income_planet = "Earth";
+const income_planet = "Earth"
 
-export const MessageCard: React.FC<MessageProps> = ({msg}) => {
-  const {login} = useUser();
-  const isOwnMessage = msg.username === login;
+export const MessageCard: React.FC<MessageProps> = ({ msg }) => {
+  const { login } = useUser()
+  const isOwnMessage = msg.username === login
 
   function formatTime(isoDateTime: string | number | Date) {
-    const dateTime = new Date(isoDateTime);
-    return dateTime.toLocaleString('en-US', {
-      timeZone: 'UTC',
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-      hour12: false
-    });
+    const dateTime = new Date(isoDateTime)
+    return dateTime.toLocaleString("en-US", {
+      timeZone: "UTC",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+      hour12: false,
+    })
   }
-
 
   return (
     <>
-        <Box className={`${isOwnMessage ? "msg--own" : "msg--alien"} msg--container`}>
-      {!isOwnMessage && (
-        income_planet === "Earth" ? (
-          <Avatar src="https://www.svgrepo.com/show/530103/earth.svg" alt="Earth" className="planet-avatar" sx={{ mr: 1 }} />
-        ) : (
-          <Avatar src="https://www.svgrepo.com/show/440497/mars.svg" alt="Mars" className="planet-avatar" sx={{ mr: 1 }} />
-        )
-      )}
+      <Box className={`${isOwnMessage ? "msg--own" : "msg--alien"} msg--container`}>
+        {!isOwnMessage && (
+          <Avatar src={require("../../assets/mars-icon.png")} alt="Mars" className="planet-avatar" sx={{ mr: 1 }} />
+        )}
 
-      <Box className={`${isOwnMessage ? "msg--own--reverse" : "msg--alien--reverse"} msg`}>
-        <Stack direction="row" spacing={1} className="msg--service">
-          <Typography variant="body2">{msg.username || "Аноним"}</Typography>
-          <Typography variant="body2" sx={{ color: "gray", ml: "1em" }}>
-            {formatTime(msg.send_time || String(new Date()))}
-          </Typography>
-        </Stack>
+        <Box className={`${isOwnMessage ? "msg--own--reverse" : "msg--alien--reverse"} msg`}>
+          <Stack direction="row" spacing={1} className="msg--service">
+            <Typography variant="body2">{msg.username || "Аноним"}</Typography>
+            <Typography variant="body2" sx={{ color: "gray", ml: "1em" }}>
+              {formatTime(msg.send_time || String(new Date()))}
+            </Typography>
+          </Stack>
 
-        {msg.error ? (
-          <Typography variant="body1" sx={{ color: "gray" }}>
-            Ошибка при отправке: {msg.error}
-          </Typography>
-        ) : (
-          <Box className={`msg--text ${isOwnMessage ? "msg--bg--own" : "msg--bg--alien"}`}>{msg.data}</Box>
+          {msg.error ? (
+            <Typography variant="body1" sx={{ color: "gray" }}>
+              Ошибка при отправке: {msg.error}
+            </Typography>
+          ) : (
+            <Box className={`msg--text ${isOwnMessage ? "msg--bg--own" : "msg--bg--alien"}`}>{msg.data}</Box>
+          )}
+        </Box>
+
+        {isOwnMessage && (
+          <Avatar src={require("../../assets/earth-icon.png")} alt="Earth" className="planet-avatar" sx={{ ml: 1 }} />
         )}
       </Box>
-
-      {isOwnMessage && (
-        income_planet === "Earth" ? (
-          <Avatar src="https://www.svgrepo.com/show/530103/earth.svg" alt="Earth" className="planet-avatar" sx={{ ml: 1 }} />
-        ) : (
-          <Avatar src="https://www.svgrepo.com/show/440497/mars.svg" alt="Mars" className="planet-avatar" sx={{ ml: 1 }} />
-        )
-      )}
-    </Box>
     </>
     // <>
     //   <div className={`${msg.username === login ? "msg--own" : "msg--alien"} msg--container`}>
@@ -82,5 +75,5 @@ export const MessageCard: React.FC<MessageProps> = ({msg}) => {
     //     </div>
     //   </div>
     // </>
-  );
+  )
 }
