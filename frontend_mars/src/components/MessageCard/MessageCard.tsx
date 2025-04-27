@@ -30,7 +30,7 @@ export const MessageCard: React.FC<MessageProps> = ({ msg }) => {
     <>
       <Box className={`${isOwnMessage ? "msg--own" : "msg--alien"} msg--container`}>
         {!isOwnMessage && (
-          <Avatar src={require("../../assets/earth-icon.png")} alt="Mars" className="planet-avatar" sx={{ mr: 1 }} />
+          <Avatar src={require("../../assets/mars-icon.png")} alt="Mars" className="planet-avatar" sx={{ mr: 1 }} />
         )}
 
         <Box className={`${isOwnMessage ? "msg--own--reverse" : "msg--alien--reverse"} msg`}>

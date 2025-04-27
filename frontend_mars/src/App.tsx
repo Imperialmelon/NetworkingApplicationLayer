@@ -15,10 +15,11 @@ function App() {
 
 
 
+
   // создание вебсокета должно быть после рендера - поместим в useEffect
   useEffect(() => {
     if (login) {
-      setWs(createWebSocket(`ws://${hostname}:8001/?username=${encodeURIComponent(login)}`))
+      setWs(createWebSocket(`ws://${hostname}:8010/?username=${encodeURIComponent(login)}`))
     } else {
       setWs(new WebSocket(`ws://${hostname}`))
     }
@@ -61,7 +62,7 @@ function App() {
     <>
       <div className="App">
       {login ?
-          <Chat messages={messageArray} ws={ws} messageArray={messageArray} setMessageArray={setMessageArray}/>
+          <MarsChat messages={messageArray} ws={ws} messageArray={messageArray} setMessageArray={setMessageArray}/>
           :
           <Login ws={ws} setWs={setWs} createWebSocket={createWebSocket}/>
         }
