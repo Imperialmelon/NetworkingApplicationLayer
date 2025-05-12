@@ -4,7 +4,7 @@ import type React from "react"
 import { useEffect, useState } from "react"
 import { useUser } from "../../hooks/useUser"
 import type { Message } from "../../consts"
-import { Box, Typography, Paper, Stack, Button } from "@mui/material"
+import { Box, Typography, Paper, Stack, Button, useMediaQuery, useTheme } from "@mui/material"
 import { hostname } from "../../consts"
 import "./MarsChat.css"
 
@@ -15,7 +15,7 @@ type MarsChatProps = {
   setMessageArray: (msg: Message[]) => void
 }
 // Header component for Mars Chat
-const Header = ({ onLogout }: { onLogout: () => void }) => {
+const Header_ = ({ onLogout }: { onLogout: () => void }) => {
   return (
     <Paper elevation={0} className="header">
       <Stack direction="row" alignItems="center" spacing={1}>
@@ -42,6 +42,62 @@ const Header = ({ onLogout }: { onLogout: () => void }) => {
   )
 }
 
+
+
+export const Header = ({ showLogoutButton = false, onLogout = () => {}, }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+
+  return (
+    <Paper elevation={0} sx={{ 
+      width: '100%',
+      p: isMobile ? 1 : 2,
+      boxSizing: 'border-box'
+    }}>
+      <Stack 
+        direction={isMobile ? 'column' : 'row'} 
+        alignItems="center" 
+        spacing={isMobile ? 1 : 2}
+        justifyContent="space-between"
+      >
+        <Box display="flex" alignItems="center">
+          <img 
+            src={require("../../assets/logo.png") || "/placeholder.svg"} 
+            alt="Earth-Mars Chat Logo" 
+            height={isMobile ? 30 : 40} 
+          />
+        </Box>
+
+        <Typography 
+          variant={isMobile ? "caption" : "body2"} 
+          sx={{
+            textAlign: isMobile ? 'center' : 'left',
+            fontSize: isTablet ? '0.8rem' : 'inherit',
+            px: isMobile ? 1 : 0
+          }}
+        >
+          Это один маленький чат для человека, но гигантский скачок для общения человечества!
+        </Typography>
+
+        {showLogoutButton && (
+          <Button
+            variant="contained"
+            onClick={onLogout}
+            sx={{
+              height: "fit-content",
+              width: isMobile ? '100%' : 'auto',
+              mt: isMobile ? 1 : 0
+            }}
+          >
+            Выйти
+          </Button>
+        )}
+      </Stack>
+    </Paper>
+  );
+};
+
 export const MarsChat: React.FC<MarsChatProps> = ({messages, ws,  messageArray, setMessageArray }) => {
   const { login, resetUser } = useUser()
 
@@ -62,7 +118,7 @@ export const MarsChat: React.FC<MarsChatProps> = ({messages, ws,  messageArray, 
 
   return (
     <Box className="mars-chat">
-      <Header onLogout={handleClickLogoutBtn} />
+      <Header onLogout={handleClickLogoutBtn} showLogoutButton={true} />
 
       <Box className="mars-chat--body">
         {messageArray.length > 0 ? (
