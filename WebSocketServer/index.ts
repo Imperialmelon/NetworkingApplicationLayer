@@ -4,9 +4,9 @@ import http from 'http';
 import ws, { type WebSocket } from 'ws';
 
 const port: number = 8001; // порт на котором будет развернут этот (вебсокет) сервер
-const hostname = 'localhost'; // адрес вебсокет сервера
-const transportLevelPort = 8002; // порт сервера транспортного уровня
-const transportLevelHostname = '192.168.12.172'; // адрес сервера транспортного уровня
+const hostname = '172.20.10.10'; // адрес вебсокет сервера
+const transportLevelPort = 8000; // порт сервера транспортного уровня
+const transportLevelHostname = '192.168.1.19'; // адрес сервера транспортного уровня
 
 interface Message {
   id?: number
@@ -29,7 +29,14 @@ app.use(express.json())
 
 app.post('/receive', (req: { body: Message }, res: { sendStatus: (arg0: number) => void }) => {
   const message: Message = req.body
-  sendMessageToOtherUsers(message.username, message)
+  if (message.error === "") {
+    sendMessageToOtherUsers(message.username, message)
+  }
+  else{
+    sendErrToUsers(message.username, message)
+  }
+  // sendMessageToOtherUsers(message.username, message)
+  console.log(message.error)
   res.sendStatus(200)
 })
 
@@ -42,7 +49,7 @@ const wss = new ws.WebSocketServer({ server })
 const users: Users = {}
 
 const sendMsgToTransportLevel = async (message: Message): Promise<void> => {
-  const response = await axios.post(`http://${transportLevelHostname}:${transportLevelPort}/send`, message)
+  const response = await axios.post(`http://${transportLevelHostname}:${transportLevelPort}/api/send`, message)
   if (response.status !== 200) {
     message.error = 'Error from transport level by sending message'
     users[message.username].forEach(element => {
@@ -54,12 +61,24 @@ const sendMsgToTransportLevel = async (message: Message): Promise<void> => {
   console.log('Response from transport level: ', response)
 }
 
+function sendErrToUsers (username: string, message: Message): void {
+  const msgString = JSON.stringify(message)
+  for (const key in users) {
+    console.log(`[array] key: ${key}, users[keys]: ${JSON.stringify(users[key])} username: ${username}`)
+      users[key].forEach(element => {
+        console.log(element.ws + " " + element)
+        element.ws.send(msgString)
+      })
+  }
+}
+
 function sendMessageToOtherUsers (username: string, message: Message): void {
   const msgString = JSON.stringify(message)
   for (const key in users) {
     console.log(`[array] key: ${key}, users[keys]: ${JSON.stringify(users[key])} username: ${username}`)
     if (key !== username) {
       users[key].forEach(element => {
+        console.log(element.ws + " " + element)
         element.ws.send(msgString)
       })
     }

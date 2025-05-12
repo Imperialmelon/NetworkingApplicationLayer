@@ -6,7 +6,7 @@ import { useUser } from "../../hooks/useUser"
 import { Box, TextField, Button, Typography, Container } from "@mui/material"
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch"
 import { hostname } from "../../consts"
-import { Header } from "../Chat/Chat"
+import { HeaderLogin } from "../Chat/Chat"
 type LoginProps = {
   ws: WebSocket | undefined
   setWs: (ws: WebSocket | undefined) => void
@@ -35,7 +35,7 @@ export const Login: React.FC<LoginProps> = ({ ws, setWs, createWebSocket }) => {
     } else {
       console.log("ws.close(1000, User enter userName); dont work")
     }
-    setWs(createWebSocket(`ws://${hostname}:8001/?username=${encodeURIComponent(userName)}`))
+    setWs(createWebSocket(`ws://${hostname}:8010/?username=${encodeURIComponent(userName)}`))
   }
 
   return (
@@ -43,7 +43,7 @@ export const Login: React.FC<LoginProps> = ({ ws, setWs, createWebSocket }) => {
       <Box className="space-background" />
       <Box className="blue-overlay" />
 
-      <Header showLogoutButton={false} />
+      <HeaderLogin showLogoutButton={false} />
 
       <Container maxWidth="md" className="main-content">
         <Box textAlign="center" className="welcome-section">

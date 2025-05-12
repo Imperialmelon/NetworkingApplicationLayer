@@ -4,9 +4,9 @@ import http from 'http';
 import ws, { type WebSocket } from 'ws';
 
 const port: number = 8010; // порт на котором будет развернут этот (вебсокет) сервер
-const hostname = 'localhost'; // адрес вебсокет сервера
-const transportLevelPort = 8080; // порт сервера транспортного уровня
-const transportLevelHostname = '192.168.1.66'; // адрес сервера транспортного уровня
+const hostname = '192.168.1.21'; // адрес вебсокет сервера
+const transportLevelPort = 8000; // порт сервера транспортного уровня
+const transportLevelHostname = '192.168.1.19'; // адрес сервера транспортного уровня
 
 interface Message {
   id?: number
@@ -29,8 +29,20 @@ app.use(express.json())
 
 app.post('/receive', (req: { body: Message }, res: { sendStatus: (arg0: number) => void }) => {
   const message: Message = req.body
-  console.log(message.data)
-  sendMessageToOtherUsers(message.username, message)
+  console.log("ERROR " + message.error, message.error === "")
+  console.log("DATA: ", message.data)
+  if (message.error === ""){
+    console.log('got message')
+    sendMessageToOtherUsers(message.username, message)
+  }
+  else{
+    console.log(`error: ${message.error}`)
+    
+  }
+  // console.log('got error')
+  // sendMessageToOtherUsers(message.username, message)
+  // console.log(message.data)
+  // console.log(message.error)
   res.sendStatus(200)
 })
 
@@ -43,7 +55,7 @@ const wss = new ws.WebSocketServer({ server })
 const users: Users = {}
 
 const sendMsgToTransportLevel = async (message: Message): Promise<void> => {
-  const response = await axios.post(`http://${transportLevelHostname}:${transportLevelPort}/send`, message)
+  const response = await axios.post(`http://${transportLevelHostname}:${transportLevelPort}/api/send`, message)
   if (response.status !== 200) {
     message.error = 'Error from transport level by sending message'
     users[message.username].forEach(element => {

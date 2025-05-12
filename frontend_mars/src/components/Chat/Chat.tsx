@@ -4,7 +4,7 @@ import { useUser } from "../../hooks/useUser"
 import type { Message } from "../../consts"
 import { Input } from "../Input/Input"
 import { MessageCard } from "../MessageCard/MessageCard"
-import { Button, Typography, Box, Paper, Stack } from "@mui/material"
+import { Button, Typography, Box, Paper, Stack, useMediaQuery, useTheme } from "@mui/material"
 import type React from "react"
 
 type ChatProps = {
@@ -15,7 +15,7 @@ type ChatProps = {
 }
 
 // Add this at the top of the file, after the imports
-export const Header = ({ showLogoutButton = false, onLogout = () => {} }) => {
+export const HeaderLogin = ({ showLogoutButton = false, onLogout = () => {} }) => {
   return (
     <Paper elevation={0} className="header">
       <Stack direction="row" alignItems="center" spacing={1}>
@@ -43,6 +43,63 @@ export const Header = ({ showLogoutButton = false, onLogout = () => {} }) => {
     </Paper>
   )
 }
+
+
+
+
+export const Header = ({ showLogoutButton = false, onLogout = () => {}, }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+
+  return (
+    <Paper elevation={0} sx={{ 
+      width: '100%',
+      p: isMobile ? 1 : 2,
+      boxSizing: 'border-box'
+    }}>
+      <Stack 
+        direction={isMobile ? 'column' : 'row'} 
+        alignItems="center" 
+        spacing={isMobile ? 1 : 2}
+        justifyContent="space-between"
+      >
+        <Box display="flex" alignItems="center">
+          <img 
+            src={require("../../assets/logo.png") || "/placeholder.svg"} 
+            alt="Earth-Mars Chat Logo" 
+            height={isMobile ? 30 : 40} 
+          />
+        </Box>
+
+        <Typography 
+          variant={isMobile ? "caption" : "body2"} 
+          sx={{
+            textAlign: isMobile ? 'center' : 'left',
+            fontSize: isTablet ? '0.8rem' : 'inherit',
+            px: isMobile ? 1 : 0
+          }}
+        >
+          Это один маленький чат для человека, но гигантский скачок для общения человечества!
+        </Typography>
+
+        {showLogoutButton && (
+          <Button
+            variant="contained"
+            onClick={onLogout}
+            sx={{
+              height: "fit-content",
+              width: isMobile ? '100%' : 'auto',
+              mt: isMobile ? 1 : 0
+            }}
+          >
+            Выйти
+          </Button>
+        )}
+      </Stack>
+    </Paper>
+  );
+};
 
 export const Chat: React.FC<ChatProps> = ({ messages, ws, messageArray, setMessageArray }) => {
   const { login, resetUser } = useUser()
